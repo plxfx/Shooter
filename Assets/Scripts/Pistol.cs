@@ -7,11 +7,11 @@ public class Pistol : Gun
 
     protected override void OnShoot()
     {
-        print("pistol");
+        
         GameObject buf = Instantiate(bullet);
         buf.transform.position = rifleStart.transform.position;
         buf.transform.rotation = transform.rotation;
-        buf.GetComponent<Bullet>().setDirection(transform.forward);
+        buf.GetComponent<Bullet>().SetDirection(transform.forward);
     }
  
 

@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     protected bool auto = false;
     protected float cooldown = 0;
 
-    public float timer = 0;
+    float timer = 0;
 
     private void Start()
     {
