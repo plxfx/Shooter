@@ -5,6 +5,8 @@ using UnityEngine;
 public class Pistol : Gun
 {
 
+
+
     protected override void OnShoot()
     {
         
@@ -17,9 +19,17 @@ public class Pistol : Gun
 
     void Start()
     {
+        ammoCurrent = 10;
+        ammoMax = 10;
+        ammoAll = 30;
+
         cooldown = 0;
         auto = false;
+
+        AmmoTextUpdate();
     }
+
+
 
     // Update is called once per frame
    

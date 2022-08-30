@@ -1,9 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Gun : MonoBehaviour
 {
+    [SerializeField] protected int ammoCurrent;
+    [SerializeField] protected int ammoMax;
+    [SerializeField] protected int ammoAll;
+    [SerializeField] protected Text ammoText;
+
+
+
+
     [SerializeField] protected Transform rifleStart;
     [SerializeField] protected GameObject bullet;
 
@@ -14,19 +24,30 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
+        
+
         print("start");
     }
 
     public void Shoot()
     {
-        print("hello4");
         if (Input.GetMouseButtonDown(0) || auto)
         {
             if (timer > cooldown)
             {
-                OnShoot();
-                timer = 0;
-                
+                if (ammoCurrent > 0)
+                {
+                    OnShoot();
+                    timer = 0;
+                    ammoCurrent--;
+                    AmmoTextUpdate();
+                }
+                else
+                {
+                    GetComponent<AudioSource>().Play();
+                }
+
+
             }
         }
     }
@@ -35,9 +56,11 @@ public class Gun : MonoBehaviour
 
     }
 
-    
+    public void AmmoTextUpdate()
+    {
+        ammoText.text = ammoCurrent + " / " + ammoAll;
+    }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
