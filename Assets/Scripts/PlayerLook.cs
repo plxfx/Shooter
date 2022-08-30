@@ -2,19 +2,23 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    [SerializeField] float mouseSense = 1; // Чувствительность мыши
+    [SerializeField] float mouseSense = 1;
 
-    // Update is called once per frame
+    [SerializeField] float minVert = -45;
+    [SerializeField] float maxVert = 45;
+
+    float rotateY = 0;
+
     void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Скрываем курсор
+        Cursor.lockState = CursorLockMode.Locked;
 
         float rotateX = Input.GetAxis("Mouse X") * mouseSense;
-        float rotateY = Input.GetAxis("Mouse Y") * mouseSense;
+        rotateY -= Input.GetAxis("Mouse Y") * mouseSense;
 
         Vector3 rotPlayer = transform.rotation.eulerAngles;
 
-        rotPlayer.x -= rotateY;
+        rotPlayer.x = Mathf.Clamp(rotateY, minVert, maxVert);
         rotPlayer.z = 0;
         rotPlayer.y += rotateX;
 
